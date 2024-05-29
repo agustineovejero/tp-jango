@@ -1,22 +1,22 @@
 from django.db import models
 class Persona(models.Model):
-    jugadores = models.CharField(max_length=100)
-    posiciones= models.CharField(max_length=100)
-    edad= models.IntegerField()
-    altura= models.IntegerField()
-    pie=models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
+    position= models.CharField(max_length=100)
+    age= models.IntegerField()
+    height= models.IntegerField()
+    foot=models.CharField(max_length=20)
 
-class fichaje(models.Model):
-    fichaje= models.DateField()
+class Fichaje(models.Model):
+    Signing= models.DateField()
 
 class Equipos(models.Model):
-    Equipoanterior=models.CharField(max_length=100)
+    PreviousTeam=models.CharField(max_length=100)
 
 class Valor(models.Model):
-    ValordeMercado=models.IntegerField()
+    MarketValue=models.IntegerField()
     
 class Temporada(models.Model):
-    temporada=models.IntegerField()
+    Season=models.IntegerField()
 
 class Club(models.Model):
     Club=models.CharField(max_length=50)
