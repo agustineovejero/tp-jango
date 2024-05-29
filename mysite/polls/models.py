@@ -7,19 +7,19 @@ class Persona(models.Model):
     foot=models.CharField(max_length=20)
 
 class Fichaje(models.Model):
-    Signing= models.DateField()
+    signing= models.DateField(null=True)
 
 class Equipos(models.Model):
-    PreviousTeam=models.CharField(max_length=100)
+    previous_team=models.CharField(max_length=100)
 
 class Valor(models.Model):
-    MarketValue=models.IntegerField()
+    market_value=models.IntegerField()
     
 class Temporada(models.Model):
-    Season=models.IntegerField()
+    season=models.IntegerField()
 
 class Club(models.Model):
-    Club=models.CharField(max_length=50)
+    club=models.CharField(max_length=50)
 
 
     

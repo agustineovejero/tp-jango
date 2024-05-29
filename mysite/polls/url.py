@@ -7,6 +7,6 @@ from polls import views
 
 urlpatterns=[
  # path("",views.index, name= "index"),
-    path("loaddatasetT", views.load_dataset, name= "load_dataset")
+    path("load_datasetT", views.load_dataset, name= "load_datasetT")
 
 ]
