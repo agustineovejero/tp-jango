@@ -51,7 +51,7 @@ def load_dataset(request):
             if market_value == "-":
                 market_value = 0
 
-            height = float()
+            height = float(height)
 
             persons.append(
                 Persona(

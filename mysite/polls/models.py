@@ -3,7 +3,7 @@ class Persona(models.Model):
     name = models.CharField(max_length=100)
     position= models.CharField(max_length=100)
     age= models.IntegerField()
-    height= models.IntegerField()
+    height= models.FloatField()
     foot=models.CharField(max_length=20)
 
 class Fichaje(models.Model):
