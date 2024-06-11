@@ -1,12 +1,10 @@
-
-
 from django.urls import path
-
-from polls import views
+from polls import tp3, csv
 
 
 urlpatterns=[
  # path("",views.index, name= "index"),
-    path("load_datasetT", views.load_dataset, name= "load_datasetT")
-
+    path("csv", csv.import_csv, name="csv"),
+    path("tp3", tp3.index, name= "tp3"),
+    path('tp3/agesbyseason.png', tp3.ages_by_season, name='ages_by_season')
 ]

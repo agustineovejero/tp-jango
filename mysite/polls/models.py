@@ -1,25 +1,19 @@
 from django.db import models
-class Persona(models.Model):
+
+class Player(models.Model):
     name = models.CharField(max_length=100)
-    position= models.CharField(max_length=100)
-    age= models.IntegerField()
-    height= models.FloatField()
-    foot=models.CharField(max_length=20)
+    position = models.CharField(max_length=100)
+    age = models.IntegerField(null=True)
+    height = models.FloatField(null=True)
+    preferred_foot = models.CharField(max_length=20)
 
-class Fichaje(models.Model):
-    signing= models.DateField(null=True)
-
-class Equipos(models.Model):
-    previous_team=models.CharField(max_length=100)
-
-class Valor(models.Model):
-    market_value=models.IntegerField()
-    
-class Temporada(models.Model):
-    season=models.IntegerField()
-
+class Signing(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    club = models.ForeignKey('Club', on_delete=models.CASCADE)
+    date_signed = models.DateField(null=True)
+    previous_team = models.CharField(max_length=100, null=True)
+    market_value = models.IntegerField(null=True)
+    season = models.CharField(max_length=10, null=True)
 class Club(models.Model):
-    club=models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
 
-
-    

@@ -1,12 +1,9 @@
 from django.contrib import admin
 
-from polls.models import Club, Equipos, Fichaje, Persona, Temporada, Valor
+from polls.models import Club,Player,Signing
 # Register your models here.
 
-admin.site.register(Persona)
-admin.site.register(Fichaje)
-admin.site.register(Equipos)
-admin.site.register(Temporada)
-admin.site.register(Valor)
+admin.site.register(Player)
+admin.site.register(Signing)
 admin.site.register(Club)
 
