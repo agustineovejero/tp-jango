@@ -94,18 +94,6 @@ def load_dataset(request):
 
         return HttpResponse("ok")
 
-def graph(request):
-    df = Persona.objects.all()
-    print(df)
-    df['Market_Value'] = pd.to_numeric(df['Valor de mercado'], errors='coerce')
-    top_10_fichajes = df.sort_values(by='Valor de mercado', ascending=False).head(10)
-    plt.figure(figsize=(10, 6))
-    plt.bar(top_10_fichajes['Jugadores'], top_10_fichajes['Valor de mercado'], color='skyblue')
-    plt.title('Top 10 Fichajes Más Caros')
-    plt.xlabel('Jugadores')
-    plt.ylabel('Precio en millones de euros')
-    plt.xticks(rotation=45, ha='right')
-    plt.tight_layout()
-    plt.show()
+
 
 
