@@ -1,11 +1,15 @@
 import io
 
 import matplotlib
+
+from polls.models import models
+
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from django.http import HttpResponse
 from django.shortcuts import render
-from polls.models import Signing
+from polls.models import Club, Player, Signing
 
 def index(request):
     return render(request, 'tp3.html')
@@ -55,21 +59,77 @@ def ages_by_season(request):
     return HttpResponse(buf, content_type='image/png')
 
 
-def top_10_expensive_signings(request):
-    # Query the top 10 most expensive signings
-    top_signings = Signing.objects.order_by('-market_value')[:10]
+
+def top_10_clubs_expensive_players(request):
+    # Query the top 10 clubs with the most expensive players
+    top_clubs = Club.objects.annotate(total_market_value=models.Sum('signing__market_value')).order_by('-total_market_value')[:10]
     
     # Prepare data
-    players = [signing.player.name for signing in top_signings]
-    values = [signing.market_value for signing in top_signings]
+    club_names = [club.name for club in top_clubs]
+    market_values = [club.total_market_value for club in top_clubs]
     
     # Create plot
     fig, ax = plt.subplots()
-    ax.bar(players, values)
+    ax.bar(club_names, market_values)
+    ax.set_xlabel('Club')
+    ax.set_ylabel('Total Market Value')
+    ax.set_title('Top 10 Clubs with the Most Expensive Players')
+    ax.tick_params(axis='x', rotation=45)  # Rotate x-axis labels for better readability
+    
+    # Save plot to a bytes buffer
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close(fig)
+    buf.seek(0)
+    
+    return HttpResponse(buf, content_type='image/png')
+
+
+
+
+
+
+def top_10_expensive_players(request):
+    # Query the top 10 most expensive players
+    top_players = Player.objects.annotate(total_market_value=models.Max('signing__market_value')).order_by('-total_market_value')[:10]
+    
+    # Prepare data
+    player_names = [player.name for player in top_players]
+    market_values = [player.total_market_value for player in top_players]
+    
+    # Create plot
+    fig, ax = plt.subplots()
+    ax.bar(player_names, market_values)
     ax.set_xlabel('Player')
     ax.set_ylabel('Market Value')
-    ax.set_title('Top 10 Most Expensive Signings')
+    ax.set_title('Top 10 Most Expensive Players')
     ax.tick_params(axis='x', rotation=45)  # Rotate x-axis labels for better readability
+    
+    # Save plot to a bytes buffer
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close(fig)
+    buf.seek(0)
+    
+    return HttpResponse(buf, content_type='image/png')
+
+
+
+def preferred_foot_distribution(request):
+    # Query data
+    right_footed_count = Player.objects.filter(preferred_foot='derecho').count()
+    left_footed_count = Player.objects.filter(preferred_foot='izquierdo').count()
+    
+    # Prepare data
+    labels = ['Right Footed', 'Left Footed']
+    sizes = [right_footed_count, left_footed_count]
+    colors = ['#ff9999','#66b3ff']
+    
+    # Create pie chart
+    fig, ax = plt.subplots()
+    ax.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    ax.set_title('Distribution of Players by Preferred Foot')
     
     # Save plot to a bytes buffer
     buf = io.BytesIO()
