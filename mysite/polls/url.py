@@ -10,8 +10,4 @@ urlpatterns=[
     path('tp3/agesbyseason.png', tp3.ages_by_season, name='ages_by_season'),
     path('tp3/expensivesignings.png', tp3.top_10_expensive_signings, name='top 10 signings')
 =======
-    path("load_datasetT", views.load_dataset, name= "load_datasetT"),
-    path("graph" , views.graph, name= "graph")
-
->>>>>>> cb7a1fb2bbb92cfecc1fea11de440762a171cbba
-]
+   
