@@ -2,6 +2,8 @@ import csv
 import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
+import pandas as pd
+import matplotlib.pyplot as plt
 
 from polls.models import Equipos, Fichaje, Persona, Temporada, Valor, Club
 
@@ -91,3 +93,7 @@ def load_dataset(request):
         Club.objects.bulk_create(clubs)
 
         return HttpResponse("ok")
+
+
+
+
