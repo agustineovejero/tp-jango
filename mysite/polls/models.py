@@ -1,5 +1,8 @@
 from django.db import models
 
+class Club(models.Model):
+    name = models.CharField(max_length=100)
+
 class Player(models.Model):
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
@@ -9,11 +12,8 @@ class Player(models.Model):
 
 class Signing(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
-    club = models.ForeignKey('Club', on_delete=models.CASCADE)
+    club = models.ForeignKey(Club, on_delete=models.CASCADE)
     date_signed = models.DateField(null=True)
     previous_team = models.CharField(max_length=100, null=True)
     market_value = models.IntegerField(null=True)
-    season = models.CharField(max_length=10, null=True)
-class Club(models.Model):
-    name = models.CharField(max_length=50)
-
+    season = models.IntegerField()
