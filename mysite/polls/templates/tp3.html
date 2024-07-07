@@ -1,14 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Statistics</title>
-</head>
-<body>
-    <h1>Player Statistics</h1>
-    <img src="tp3/agesbyseason.png" />
-
-    <img src="tp3/expensivesignings.png" />
-</body>
-</html>
+{% extends 'index.html' %}
+    {% block header %}
+    Player and Club Statistics
+    {% endblock %}
+    
+    {% block content %}
+        <section>
+            <h2>Players by Age and Season</h2>
+            <div class="chart-container">
+                <img src="{% url 'ages_by_season' %}?{{ timestamp }}" alt="Players by Age and Season">
+            </div>
+            <p>This chart shows the distribution of player ages across the last three seasons. It helps in understanding how age demographics change over time.</p>
+        </section>
+        
+        <section>
+            <h2>Top 10 Clubs with Most Expensive Players</h2>
+            <div class="chart-container">
+                <img src="{% url 'top_10_clubs_expensive_players' %}?{{ timestamp }}" alt="Top 10 Clubs with Most Expensive Players">
+            </div>
+            <p>This chart displays the top 10 clubs based on the total market value of their players. It provides insight into which clubs invest the most in player acquisitions.</p>
+        </section>
+        
+        <section>
+            <h2>Top 10 Most Expensive Players</h2>
+            <div class="chart-container">
+                <img src="{% url 'top_10_expensive_players' %}?{{ timestamp }}" alt="Top 10 Most Expensive Players">
+            </div>
+            <p>This chart highlights the top 10 most expensive players based on their market value.</p>
+        </section>
+        
+        <section>
+            <h2>Distribution of Players by Preferred Foot</h2>
+            <div class="chart-container">
+                <img src="{% url 'preferred_foot_distribution' %}?{{ timestamp }}" alt="Distribution of Players by Preferred Foot">
+            </div>
+            <p>This pie chart illustrates the distribution of players based on their preferred foot.</p>
+        </section>
+    </main>
+    {% endblock %}

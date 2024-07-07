@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+
+{% block header %}
+{{ club.name }} Details
+{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Club Details</h2>
+    <p><strong>Total Players:</strong> {{ total_players }}</p>
+    <p><strong>Average Market Value:</strong> ${{ average_market_value|floatformat:2 }}</p>
+    
+    <h3>Players Signed</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Player Name</th>
+                <th>Position</th>
+                <th>Age</th>
+                <th>Height</th>
+                <th>Preferred Foot</th>
+                <th>Market Value</th>
+                <th>Year of Signing</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for signing in signings %}
+            <tr>
+                <td>{{ signing.player.name }}</td>
+                <td>{{ signing.player.position }}</td>
+                <td>{{ signing.player.age }}</td>
+                <td>{{ signing.player.height }}</td>
+                <td>{{ signing.player.preferred_foot }}</td>
+                <td>${{ signing.market_value }}</td>
+                <td>{{ signing.date_signed|date:"Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No players found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

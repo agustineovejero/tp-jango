@@ -3,6 +3,11 @@ from datetime import datetime
 from polls.models import Player, Club, Signing
 
 def import_csv(request):
+    # Clear existing records in the relevant tables
+    Signing.objects.all().delete()
+    Player.objects.all().delete()
+    Club.objects.all().delete()
+
     with open('DatasetT.csv', 'r') as file:
         reader = csv.DictReader(file, delimiter=';')
         for row in reader:
